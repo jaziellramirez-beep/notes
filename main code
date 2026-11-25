@@ -1,0 +1,127 @@
+#include <iostream>
+#include <string>
+#include "BankAccount.h"
+using namespace std;
+
+int main()
+{
+    int choice;
+    BankAccount account;
+
+    // Main menu
+    do
+    {
+        cout << "\n===== BANK ACCOUNT =====" << endl;
+        cout << "1. Create Account" << endl;
+        cout << "2. Exit" << endl;
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        if (choice == 1)
+        {
+            string name;
+            string number;
+
+            // Create an empty object
+            account = BankAccount();
+
+            cin.ignore();
+
+            cout << "Enter account holder name: ";
+            getline(cin, name);
+
+            cout << "Enter account number: ";
+            getline(cin, number);
+
+            // Initialize using setters
+            account.setName(name);
+            account.setAccountNumber(number);
+
+            int option;
+
+            // Account menu
+            do
+            {
+                cout << "\n===== ACCOUNT MENU =====" << endl;
+                cout << "1. Display Account" << endl;
+                cout << "2. Update Information" << endl;
+                cout << "3. Deposit" << endl;
+                cout << "4. Withdraw" << endl;
+                cout << "5. Check Balance" << endl;
+                cout << "6. Exit Account" << endl;
+                cout << "Enter choice: ";
+                cin >> option;
+
+                switch (option)
+                {
+                    case 1:
+                        account.display();
+                        break;
+
+                    case 2:
+                    {
+                        cin.ignore();
+
+                        cout << "Enter new name: ";
+                        getline(cin, name);
+
+                        cout << "Enter new account number: ";
+                        getline(cin, number);
+
+                        account.setName(name);
+                        account.setAccountNumber(number);
+
+                        cout << "Information updated!" << endl;
+                        break;
+                    }
+
+                    case 3:
+                    {
+                        double amount;
+
+                        cout << "Enter deposit amount: ";
+                        cin >> amount;
+
+                        account.deposit(amount);
+                        break;
+                    }
+
+                    case 4:
+                    {
+                        double amount;
+
+                        cout << "Enter withdrawal amount: ";
+                        cin >> amount;
+
+                        account.withdraw(amount);
+                        break;
+                    }
+
+                    case 5:
+                        cout << "Balance: $"
+                             << account.getBalance() << endl;
+                        break;
+
+                    case 6:
+                        cout << "Leaving account menu..." << endl;
+                        break;
+
+                    default:
+                        cout << "Invalid choice." << endl;
+                }
+
+            } while (option != 6);
+        }
+        else if (choice == 2)
+        {
+            cout << "Goodbye!" << endl;
+        }
+        else
+        {
+            cout << "Invalid choice." << endl;
+        }
+
+    } while (choice != 2);// run everything above if its not 2
+
+    return 0;
+}
